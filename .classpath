@@ -2,5 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jackson-core-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jackson-jaxrs-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jackson-xc-1.9.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jersey-client-1.18.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jersey-core-1.18.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jersey-json-1.18.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jersey-server-1.18.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jersey-servlet-1.18.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jettison-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/AdamDonegan/Downloads/jersey-archive-1.18/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
