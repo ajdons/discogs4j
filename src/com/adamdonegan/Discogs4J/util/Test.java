@@ -11,7 +11,7 @@ public class Test {
 		System.out.println("This is a test");
 		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET);
 		//client.getRequestToken();
-		client.getAccessToken();
+		//client.getAccessToken();
 	}
 }
 
