@@ -9,9 +9,35 @@ import org.codehaus.jettison.json.JSONObject;
 import com.adamdonegan.Discogs4J.util.HttpRequest;
 
 public class DiscogsClient {
+	
+	//Authorization
 	private static final String URL_REQUEST_TOKEN = "https://api.discogs.com/oauth/request_token";
 	private static final String URL_ACCESS_TOKEN = "https://api.discogs.com/oauth/access_token";
 	
+	//Database
+	private static final String URL_RELEASE = "https://api.discogs.com/releases/{release_id}";
+	private static final String URL_MASTER_RELEASE = "https://api.discogs.com/masters/{master_id}";
+	private static final String URL_MASTER_RELEASE_VERSIONS = "https://api.discogs.com/masters/{master_id}/versions";
+	private static final String URL_ARTIST = "https://api.discogs.com/artists/{artist_id}";
+	private static final String URL_ARTIST_RELEASES = "https://api.discogs.com/artists/{artist_id}/releases";
+	private static final String URL_LABEL = "https://api.discogs.com/labels/{label_id}";
+	private static final String URL_LABEL_RELEASES = "https://api.discogs.com/labels/{label_id}/releases";
+	private static final String URL_SEARCH = "https://api.discogs.com/database/search?q={query}";
+	
+	//User Identity
+	private static final String URL_USER_IDENTITY = "https://api.discogs.com/oauth/identity";
+	private static final String URL_USER_PROFILE = "https://api.discogs.com/users/{username}";
+	
+	//User Collection
+	private static final String URL_COLLECTION = "https://api.discogs.com/users/{username}/collection/folders";
+	private static final String URL_COLLECTION_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}";
+	private static final String URL_COLLECTION_RELEASES = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases";
+	private static final String URL_ADD_RELEASE_TO_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}";
+	private static final String URL_DELETE_INSTANCE_FROM_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}";
+	
+	//User Wantlist
+	private static final String URL_WANTLIST = "https://api.discogs.com/users/{username}/wants";
+	private static final String URL_MODIFY_WANTLIST_WITH_RELEASE = "https://api.discogs.com/users/{username}/wants/{release_id}";
 	
 	private static String CONSUMER_KEY = "tZplWaLrLakbPmeKDnNR";
 	private static String CONSUMER_SECRET = "WlvAHSrMKkEokrhICslQndFmlwjafEwW";
