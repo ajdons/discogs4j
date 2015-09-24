@@ -26,7 +26,10 @@ public class Test {
 		//client.search("Arkells");
 		
 		//client.collection("discogs4jdev");
-		client.collectionFolder("discogs4jdev", "1");
+		//client.collectionFolder("discogs4jdev", "1");
+		//client.collectionReleases("discogs4jdev", "1");
+		client.addReleaseToFolder("discogs4jdev", "633608", "6160782");
+		//client.modifyInstanceInFolder("discogs4jdev", "1", "6160782", "141811555");
 	}
 }
 

@@ -33,7 +33,7 @@ public class DiscogsClient {
 	private static final String URL_COLLECTION_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}";
 	private static final String URL_COLLECTION_RELEASES = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases";
 	private static final String URL_ADD_RELEASE_TO_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}";
-	private static final String URL_DELETE_INSTANCE_FROM_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}";
+	private static final String URL_MODIFY_INSTANCE_IN_FOLDER = "https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}";
 	
 	//User Wantlist
 	private static final String URL_WANTLIST = "https://api.discogs.com/users/{username}/wants";
@@ -56,6 +56,12 @@ public class DiscogsClient {
 		CONSUMER_SECRET = consumerSecret;
 	}
 	
+	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/oauth/identity
+	 * params: none
+	 */
 	public String identity() throws JSONException {
 		
 		HttpRequest request = HttpRequest.get(HttpRequest.append(URL_USER_IDENTITY, authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET))).userAgent(USER_AGENT);
@@ -66,6 +72,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/users/{username}
+	 * params: username
+	 */
 	public String profile(String username) throws JSONException {
 		
 		Map<String, String> params = new HashMap<String, String>();
@@ -78,6 +89,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/database/search?q={query}
+	 * params: query
+	 */
 	public String search(String query) throws JSONException 
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -90,6 +106,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/releases/{release_id}
+	 * params: release_id
+	 */
 	public String release(String release_id) throws JSONException 
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -102,6 +123,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/masters/{master_id}
+	 * params: master_id
+	 */
 	public String masterRelease(String master_id) throws JSONException 
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -114,6 +140,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/masters/{master_id}/versions
+	 * params: master_id
+	 */
 	public String masterReleaseVersions(String master_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -126,6 +157,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/artists/{artist_id}
+	 * params: artist_id
+	 */
 	public String artist(String artist_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -138,6 +174,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/artists/{artist_id}/releases
+	 * params: artist_id
+	 */
 	public String artistReleases(String artist_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -150,6 +191,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/labels/{label_id}
+	 * params: label_id
+	 */
 	public String label(String label_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -162,6 +208,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/labels/{label_id}/releases
+	 * params: label_id
+	 */
 	public String labelReleases(String label_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -174,6 +225,11 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET, POST
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders
+	 * params: username
+	 */
 	public String collection(String username) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
@@ -186,12 +242,75 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	/**----------------------------------------------
+	 * method: GET, POST, DELETE
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}
+	 * params: username, folder_id
+	 */
 	public String collectionFolder(String username, String folder_id) throws JSONException
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", username);
 		params.put("folder_id", folder_id);
 		HttpRequest request = HttpRequest.get(HttpRequest.append(replaceURLParams(URL_COLLECTION_FOLDER, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET))).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases
+	 * params: username, folder_id
+	 */
+	public String collectionReleases(String username, String folder_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("folder_id", folder_id);
+		HttpRequest request = HttpRequest.get(HttpRequest.append(replaceURLParams(URL_COLLECTION_RELEASES, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET))).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: POST
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}
+	 * params: username, folder_id, release_id
+	 * NOTE  : use folder_id = 1 for uncategorized
+	 */
+	public String addReleaseToFolder(String username, String folder_id, String release_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("folder_id", folder_id);
+		params.put("release_id", release_id);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_ADD_RELEASE_TO_FOLDER, params)).contentType(HttpRequest.CONTENT_TYPE_FORM).userAgent(USER_AGENT).form(authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET));
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: POST, DELETE
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}
+	 * params: username, folder_id, release_id, instance_id
+	 */
+	public String modifyInstanceInFolder(String username, String folder_id, String release_id, String instance_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("folder_id", folder_id);
+		params.put("release_id", release_id);
+		params.put("instance_id", instance_id);
+		HttpRequest request = HttpRequest.get(HttpRequest.append(replaceURLParams(URL_MODIFY_INSTANCE_IN_FOLDER, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET))).userAgent(USER_AGENT);
 		System.out.println(request.toString());
 		JSONObject JSONResponse = new JSONObject(request.body());
 		System.out.println(JSONResponse.toString(4));
