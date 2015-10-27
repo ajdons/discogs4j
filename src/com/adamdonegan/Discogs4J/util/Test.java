@@ -18,6 +18,7 @@ public class Test {
 		//client.identity();
 		//client.profile("discogs4jdev");
 		
+		/* DATABASE */
 		//client.release("6160782");
 		//client.masterRelease("671582");
 		//client.masterReleaseVersions("671582");
@@ -27,11 +28,22 @@ public class Test {
 		//client.labelReleases("96508");
 		//client.search("Arkells");
 		
+		/* COLLECTION */
 		//client.collection("discogs4jdev");
 		//client.collectionFolder("discogs4jdev", "1");
+		//client.deleteCollectionFolder("discogs4jdev", "633608");
 		//client.collectionReleases("discogs4jdev", "1");
 		//client.addReleaseToFolder("discogs4jdev", "1", "6160782");
 		//client.modifyInstanceInFolder("discogs4jdev", "1", "6160782", "143245571");
+		//client.deleteInstanceFromFolder("discogs4jdev", "1", "5075222", "145130456");
+		
+		/* WANTLIST */
+		//client.wantlist("discogs4jdev");
+		//client.deleteFromWantlist("discogs4jdev", "5681803");
+		//client.addToWantlist("discogs4jdev", "5681803");
+		
+		/* MARKETPLACE */
+		client.inventory("discogs4jdev");
 	}
 }
 

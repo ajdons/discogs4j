@@ -39,6 +39,10 @@ public class DiscogsClient {
 	private static final String URL_WANTLIST = "https://api.discogs.com/users/{username}/wants";
 	private static final String URL_MODIFY_WANTLIST_WITH_RELEASE = "https://api.discogs.com/users/{username}/wants/{release_id}";
 	
+	//Marketplace
+	private static final String URL_INVENTORY ="https://api.discogs.com/users/{username}/inventory";
+	private static final String URL_LISTING = "https://api.discogs.com/marketplace/listings/{listing_id}";
+	
 	private static String CONSUMER_KEY = "tZplWaLrLakbPmeKDnNR";
 	private static String CONSUMER_SECRET = "WlvAHSrMKkEokrhICslQndFmlwjafEwW";
 	private static String USER_AGENT = "Discogs4J/0.1 +https://github.com/ajdons/Discogs4J";
@@ -261,6 +265,30 @@ public class DiscogsClient {
 		return JSONResponse.toString(4);
 	}
 	
+	
+	/**----------------------------------------------
+	 * method: DELETE
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}
+	 * params: username, folder_id
+	 */
+	public String deleteCollectionFolder(String username, String folder_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("folder_id", folder_id);
+		HttpRequest request = HttpRequest.delete(replaceURLParams(URL_COLLECTION_FOLDER, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		
+		if(request.noContent()){
+			System.out.println(Integer.toString(request.code()));
+			return Integer.toString(request.code());
+		}
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
 	/**----------------------------------------------
 	 * method: GET
 	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases
@@ -301,7 +329,7 @@ public class DiscogsClient {
 	}
 	
 	/**----------------------------------------------
-	 * method: POST, DELETE
+	 * method: POST
 	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}
 	 * params: username, folder_id, release_id, instance_id
 	 */
@@ -320,6 +348,153 @@ public class DiscogsClient {
 		
 		return JSONResponse.toString(4);
 	}
+	
+	
+	/**----------------------------------------------
+	 * method: DELETE
+	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases/{release_id}/instances/{instance_id}
+	 * params: username, folder_id, release_id, instance_id
+	 */
+	public String deleteInstanceFromFolder(String username, String folder_id, String release_id, String instance_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("folder_id", folder_id);
+		params.put("release_id", release_id);
+		params.put("instance_id", instance_id);
+		
+		HttpRequest request = HttpRequest.delete(replaceURLParams(URL_MODIFY_INSTANCE_IN_FOLDER, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		
+		if(request.noContent()){
+			System.out.println(Integer.toString(request.code()));
+			return Integer.toString(request.code());
+		}
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/users/{username}/wants
+	 * params: username
+	 */
+	public String wantlist(String username) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_WANTLIST, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: PUT
+	 * URL   : https://api.discogs.com/users/{username}/wants/{release_id}
+	 * params: username, release_id
+	 */
+	public String addToWantlist(String username, String release_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("release_id", release_id);
+		HttpRequest request = HttpRequest.put(replaceURLParams(URL_MODIFY_WANTLIST_WITH_RELEASE, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		System.out.println(request.code());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: DELETE
+	 * URL   : https://api.discogs.com/users/{username}/wants/{release_id}
+	 * params: username, release_id
+	 */
+	public String deleteFromWantlist(String username, String release_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("release_id", release_id);
+		HttpRequest request = HttpRequest.delete(replaceURLParams(URL_MODIFY_WANTLIST_WITH_RELEASE, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).contentType(HttpRequest.CONTENT_TYPE_FORM).userAgent(USER_AGENT).form(authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET));
+		System.out.println(request.toString());
+		if(request.noContent()){
+			System.out.println(Integer.toString(request.code()));
+			return Integer.toString(request.code());
+		}
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/users/{username}/inventory
+	 * params: username
+	 */
+	public String inventory(String username) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_INVENTORY, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+	/**----------------------------------------------
+	 * method: GET
+	 * URL   : https://api.discogs.com/marketplace/listings/{listing_id}
+	 * params: listing_id
+	 */
+	public String listing(String listing_id) throws JSONException
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("listing_id", listing_id);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_LISTING, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+		System.out.println(request.toString());
+		JSONObject JSONResponse = new JSONObject(request.body());
+		System.out.println(JSONResponse.toString(4));
+		
+		return JSONResponse.toString(4);
+	}
+	
+//	public String editListing(String listing_id) throws JSONException
+//	{
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("listing_id", listing_id);
+//		HttpRequest request = HttpRequest.get(replaceURLParams(URL_LISTING, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).userAgent(USER_AGENT);
+//		System.out.println(request.toString());
+//		JSONObject JSONResponse = new JSONObject(request.body());
+//		System.out.println(JSONResponse.toString(4));
+//		
+//		return JSONResponse.toString(4);
+//	}
+	
+//	public String deleteListing(String listing_id) throws JSONException
+//	{
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("listing_id", listing_id);
+//		HttpRequest request = HttpRequest.delete(replaceURLParams(URL_LISTING, params), authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET), true).contentType(HttpRequest.CONTENT_TYPE_FORM).userAgent(USER_AGENT).form(authenticatedHeader(OAUTH_TOKEN, OAUTH_TOKEN_SECRET));
+//		System.out.println(request.toString());
+//		
+//		if(request.noContent()){
+//			System.out.println(Integer.toString(request.code()));
+//			return Integer.toString(request.code());
+//		}
+//		JSONObject JSONResponse = new JSONObject(request.body());
+//		System.out.println(JSONResponse.toString(4));
+//		
+//		return JSONResponse.toString(4);
+//	}
 	
 	public String replaceURLParams(String start, Map<String, String> keysAndValues){
 		String endString = start;
