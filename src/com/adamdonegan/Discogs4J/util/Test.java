@@ -1,6 +1,6 @@
 package com.adamdonegan.Discogs4J.util;
 
-import org.codehaus.jettison.json.JSONException;
+import org.json.JSONException;
 
 import com.adamdonegan.Discogs4J.client.DiscogsClient;
 
@@ -8,14 +8,15 @@ public class Test {
 	private static String CONSUMER_KEY = "tZplWaLrLakbPmeKDnNR";
 	private static String CONSUMER_SECRET = "WlvAHSrMKkEokrhICslQndFmlwjafEwW";
 	private static String USER_AGENT = "Discogs4J/0.1 +https://github.com/ajdons/Discogs4J";
+	private static String CALLBACK_URL = "www.callback.com";
 
 	public static void main(String[] args) throws JSONException {
 		System.out.println("This is a test");
-		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT);
+		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT, CALLBACK_URL);
 		//client.getRequestToken();
 		//client.getAccessToken();
 		
-		//client.identity();
+		System.out.println(client.identity());
 		//client.profile("discogs4jdev");
 		
 		/* DATABASE */
@@ -35,7 +36,7 @@ public class Test {
 		//client.collectionReleases("discogs4jdev", "1");
 		//client.addReleaseToFolder("discogs4jdev", "1", "6160782");
 		//client.modifyInstanceInFolder("discogs4jdev", "1", "6160782", "143245571");
-		//client.deleteInstanceFromFolder("discogs4jdev", "1", "5075222", "145130456");
+		//client.deleteInstanceFromFolder("discogs4jdev", "1", "6160782", "145292580");
 		
 		/* WANTLIST */
 		//client.wantlist("discogs4jdev");
@@ -43,7 +44,7 @@ public class Test {
 		//client.addToWantlist("discogs4jdev", "5681803");
 		
 		/* MARKETPLACE */
-		client.inventory("discogs4jdev");
+		//client.inventory("discogs4jdev");
 	}
 }
 
