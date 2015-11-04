@@ -1,6 +1,8 @@
 package com.adamdonegan.Discogs4J.util;
 
-import org.json.JSONException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.adamdonegan.Discogs4J.client.DiscogsClient;
 
@@ -10,13 +12,13 @@ public class Test {
 	private static String USER_AGENT = "Discogs4J/0.1 +https://github.com/ajdons/Discogs4J";
 	private static String CALLBACK_URL = "www.callback.com";
 
-	public static void main(String[] args) throws JSONException {
+	public static void main(String[] args) {
 		System.out.println("This is a test");
 		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT, CALLBACK_URL);
-		//client.getRequestToken();
+		client.getRequestToken();
 		//client.getAccessToken();
 		
-		System.out.println(client.identity());
+		//System.out.println(client.identity());
 		//client.profile("discogs4jdev");
 		
 		/* DATABASE */
@@ -46,5 +48,6 @@ public class Test {
 		/* MARKETPLACE */
 		//client.inventory("discogs4jdev");
 	}
+	
 }
 
