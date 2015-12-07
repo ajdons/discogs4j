@@ -14,40 +14,54 @@ public class Test {
 
 	public static void main(String[] args) {
 		System.out.println("This is a test");
-		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT, CALLBACK_URL);
-		client.getRequestToken();
+		DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT, "mbRRMosslqDrucVpQUkNeUzhlylKkMgDaLyJcjCN", "iWnxHVzdSXWlhkWyPCnIqGNbkRCyhWgJrsNbIRCw");
+		//DiscogsClient client = new DiscogsClient(CONSUMER_KEY, CONSUMER_SECRET, USER_AGENT, CALLBACK_URL);
+		//client.getRequestToken();
+		//System.out.println(client.getAuthorizationURL());
+		//client.setRequestToken("oEXFOoqaZRJEipLGkeqzDZVcaoFGFUKEXtYkMRaY");
+		//client.setRequestTokenSecret("xwSpnmhselKtAgbchhHWlpqwAZIwYwEDtiTkkjkj");
+		//client.getAccessToken("VqrLztkdIc");
+		
+		//client.getAccessToken("jMEDRnZwyz");
+		//System.out.println(client.artist("732448"));
+		//client.getRequestToken();
 		//client.getAccessToken();
 		
 		//System.out.println(client.identity());
-		//client.profile("discogs4jdev");
+		System.out.println(client.profile("discogs4jdev"));
+		//System.out.println(client.genericPost("https://api.discogs.com/users/ajdons", null));
 		
 		/* DATABASE */
-		//client.release("6160782");
-		//client.masterRelease("671582");
-		//client.masterReleaseVersions("671582");
-		//client.artist("732448");
-		//client.artistReleases("732448");
-		//client.label("96508");
-		//client.labelReleases("96508");
-		//client.search("Arkells");
+		//System.out.println(client.release("6160782"));
+		//System.out.println(client.masterRelease("671582"));
+		//System.out.println(client.masterReleaseVersions("671582"));
+		//System.out.println(client.artist("732448"));
+		//System.out.println(client.artistReleases("732448"));
+		//System.out.println(client.label("96508"));
+		//System.out.println(client.labelReleases("96508"));
+		//System.out.println(client.search("Arkells"));
+		//System.out.println(client.advancedSearch("am", map));
+
 		
 		/* COLLECTION */
-		//client.collection("discogs4jdev");
-		//client.collectionFolder("discogs4jdev", "1");
-		//client.deleteCollectionFolder("discogs4jdev", "633608");
-		//client.collectionReleases("discogs4jdev", "1");
-		//client.addReleaseToFolder("discogs4jdev", "1", "6160782");
-		//client.modifyInstanceInFolder("discogs4jdev", "1", "6160782", "143245571");
-		//client.deleteInstanceFromFolder("discogs4jdev", "1", "6160782", "145292580");
+		//System.out.println(client.collection("ajdons"));
+		//System.out.println(client.collectionFolder("ajdons", "1"));
+		//System.out.println(client.addCollectionFolder("ajdons", "Newest Folder"));
+		//System.out.println(client.deleteCollectionFolder("ajdons", "682470"));
+		//System.out.println(client.genericDelete("https://api.discogs.com/users/ajdons/collection/folders/682492"));
+		//System.out.println(client.collectionReleases("ajdons", "1"));
+		//System.out.println(client.addReleaseToFolder("discogs4jdev", "1", "6160782"));
+		//System.out.println(client.updateInstanceInFolder("ajdons", "1", "6160782", "149488219", map));
+		//System.out.println(client.deleteInstanceFromFolder("ajdons", "1", "6160782", "149488219"));
 		
 		/* WANTLIST */
-		//client.wantlist("discogs4jdev");
-		//client.deleteFromWantlist("discogs4jdev", "5681803");
-		//client.addToWantlist("discogs4jdev", "5681803");
+		//System.out.println(client.wantlist("ajdons"));
+		//System.out.println(client.deleteFromWantlist("ajdons", "5681803"));
+		//System.out.println(client.addToWantlist("ajdons", "5681803"));
 		
 		/* MARKETPLACE */
-		//client.inventory("discogs4jdev");
+		//client.inventory("ajdons");
 	}
-	
+
 }
 
