@@ -77,7 +77,10 @@ public class DiscogsClient {
 		userAgent = user_agent;
 		oauthToken = oauth_token;
 		oauthTokenSecret = oauth_token_secret;
-		
+	}
+	
+	public DiscogsClient (String user_agent) {
+		userAgent = user_agent;
 	}
 	
 	
@@ -117,7 +120,6 @@ public class DiscogsClient {
 		
 		HttpRequest request = HttpRequest.get(URL_USER_IDENTITY).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
-		
 		
 		
 		return request.body();
@@ -217,16 +219,21 @@ public class DiscogsClient {
 	 * URL   : https://api.discogs.com/masters/{master_id}/versions
 	 * params: master_id
 	 */
-	public String masterReleaseVersions(String master_id) 
+	public String masterReleaseVersions(String master_id, Map<String, String> extraParams) 
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("master_id", master_id);
-		HttpRequest request = HttpRequest.get(replaceURLParams(URL_MASTER_RELEASE_VERSIONS, params)).authorization(authenticatedHeader()).userAgent(userAgent);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_MASTER_RELEASE_VERSIONS, params), extraParams, true).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
 		
 		
 		
 		return request.body();
+	}
+	
+	public String masterReleaseVersions(String master_id)
+	{
+		return masterReleaseVersions(master_id, null);
 	}
 	
 	/**----------------------------------------------
@@ -251,16 +258,21 @@ public class DiscogsClient {
 	 * URL   : https://api.discogs.com/artists/{artist_id}/releases
 	 * params: artist_id
 	 */
-	public String artistReleases(String artist_id) 
+	public String artistReleases(String artist_id, Map<String, String> extraParams) 
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("artist_id", artist_id);
-		HttpRequest request = HttpRequest.get(replaceURLParams(URL_ARTIST_RELEASES, params)).authorization(authenticatedHeader()).userAgent(userAgent);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_ARTIST_RELEASES, params), extraParams, true).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
 		
 		
 		
 		return request.body();
+	}
+	
+	public String artistReleases(String artist_id)
+	{
+		return artistReleases(artist_id, null);
 	}
 	
 	/**----------------------------------------------
@@ -285,16 +297,21 @@ public class DiscogsClient {
 	 * URL   : https://api.discogs.com/labels/{label_id}/releases
 	 * params: label_id
 	 */
-	public String labelReleases(String label_id) 
+	public String labelReleases(String label_id, Map<String, String> extraParams) 
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("label_id", label_id);
-		HttpRequest request = HttpRequest.get(replaceURLParams(URL_LABEL_RELEASES, params)).authorization(authenticatedHeader()).userAgent(userAgent);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_LABEL_RELEASES, params), extraParams, true).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
 		
 		
 		
 		return request.body();
+	}
+	
+	public String labelReleases(String label_id)
+	{
+		return labelReleases(label_id, null);
 	}
 	
 	/**----------------------------------------------
@@ -383,17 +400,22 @@ public class DiscogsClient {
 	 * URL   : https://api.discogs.com/users/{username}/collection/folders/{folder_id}/releases
 	 * params: username, folder_id
 	 */
-	public String collectionReleases(String username, String folder_id) 
+	public String collectionReleases(String username, String folder_id, Map<String, String> extraParams) 
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", username);
 		params.put("folder_id", folder_id);
-		HttpRequest request = HttpRequest.get(replaceURLParams(URL_COLLECTION_RELEASES, params)).authorization(authenticatedHeader()).userAgent(userAgent);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_COLLECTION_RELEASES, params), extraParams, true).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
 		
 		
 		
 		return request.body();
+	}
+	
+	public String collectionReleases(String username, String folder_id)
+	{
+		return collectionReleases(username, folder_id, null);
 	}
 	
 	/**----------------------------------------------
@@ -471,16 +493,21 @@ public class DiscogsClient {
 	 * URL   : https://api.discogs.com/users/{username}/wants
 	 * params: username
 	 */
-	public String wantlist(String username) 
+	public String wantlist(String username, Map<String, String> extraParams) 
 	{
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("username", username);
-		HttpRequest request = HttpRequest.get(replaceURLParams(URL_WANTLIST, params)).authorization(authenticatedHeader()).userAgent(userAgent);
+		HttpRequest request = HttpRequest.get(replaceURLParams(URL_WANTLIST, params), extraParams, true).authorization(authenticatedHeader()).userAgent(userAgent);
 		System.out.println(request.toString());
 		
 		
 		
 		return request.body();
+	}
+	
+	public String wantlist(String username)
+	{
+		return wantlist(username, null);
 	}
 	
 	/**----------------------------------------------
@@ -520,6 +547,22 @@ public class DiscogsClient {
 		}
 		
 		
+		
+		return request.body();
+	}
+	
+	public String updateInWantlist(String username, String release_id, Map<String, String> extraParams)
+	{
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("username", username);
+		params.put("release_id", release_id);
+		HttpRequest request = HttpRequest.post(replaceURLParams(URL_MODIFY_WANTLIST_WITH_RELEASE, params)).authorization(authenticatedHeader()).userAgent(userAgent).contentType(HttpRequest.CONTENT_TYPE_JSON).send(mapToJson(extraParams));
+		System.out.println(request.toString());
+		
+		if(request.noContent()){
+			System.out.println(Integer.toString(request.code()));
+			return Integer.toString(request.code()) + " No Content";
+		}
 		
 		return request.body();
 	}
